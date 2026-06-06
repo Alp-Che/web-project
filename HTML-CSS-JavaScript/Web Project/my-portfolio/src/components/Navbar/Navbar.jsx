@@ -11,11 +11,12 @@ import './Navbar.css'
 
 // ── Data: edit these links to match your sections ─────────────
 const NAV_LINKS = [
-  { label: 'Home',     href: '#hero'     },
-  { label: 'About',    href: '#about'    },
-  { label: 'Skills',   href: '#skills'   },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact',  href: '#contact'  },
+  { label: 'Home',             href: '#home' },
+  { label: 'About',            href: '#about' },
+  { label: 'Game Information', href: '#game-information' },
+  { label: 'Leaderboard',      href: '#leaderboard' },
+  { label: 'Developer',        href: '#developer' },
+  { label: 'Feedback',         href: '#feedback' },
 ]
 
 function Navbar() {

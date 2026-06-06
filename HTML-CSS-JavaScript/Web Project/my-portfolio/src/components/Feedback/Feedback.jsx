@@ -14,7 +14,7 @@
 //   2. Optionally wire up a real form service like Formspree
 
 import { useState } from 'react'
-import './Contact.css'
+import './Feedback.css'
 
 // ── Contact info items — update with YOUR details ─────────────
 const CONTACT_INFO = [

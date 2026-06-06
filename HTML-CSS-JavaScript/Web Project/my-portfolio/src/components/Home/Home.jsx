@@ -8,7 +8,7 @@
 //   1. Replace the name, role, tagline, and location with YOUR info
 //   2. Update the avatar initials at the bottom
 
-import './Hero.css'
+import './Home.css'
 
 function Hero() {
   return (

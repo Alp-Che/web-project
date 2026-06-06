@@ -13,7 +13,7 @@
 //   4. Swap featured: true to your best project
 
 import { useState } from 'react'
-import './Projects.css'
+'./GameInformation.css'
 
 // ── Projects data — replace with your own ─────────────────────
 const PROJECTS = [

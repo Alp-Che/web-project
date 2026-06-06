@@ -1,0 +1,73 @@
+/* ─── Leaderboard.css ────────────────────────────────────────── */
+
+/* Main section padding */
+.leaderboard {
+  padding: 100px 0;
+  text-align: center;
+}
+
+/* Container for the table to keep it centered and stylish */
+.leaderboard__container {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  max-width: 800px;
+  margin: 0 auto;
+  overflow-x: auto; /* Ensures table is scrollable on small mobile screens */
+}
+
+/* Base table styling */
+.leaderboard__table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+/* Table cells styling */
+.leaderboard__table th,
+.leaderboard__table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* Table header styling */
+.leaderboard__table th {
+  font-weight: 700;
+  color: var(--text-h);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+/* Remove bottom border from the last row */
+.leaderboard__table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Subtle hover effect for rows */
+.leaderboard__table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Highlights for Top 3 Players ──────────────────────────── */
+
+/* Gold for 1st place */
+.top-1 td {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+/* Silver for 2nd place */
+.top-2 td {
+  color: #c0c0c0;
+  font-weight: bold;
+}
+
+/* Bronze for 3rd place */
+.top-3 td {
+  color: #cd7f32;
+  font-weight: bold;
+}

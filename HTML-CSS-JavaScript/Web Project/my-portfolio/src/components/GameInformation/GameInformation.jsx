@@ -1,184 +1,117 @@
-// ─── Projects.jsx ─────────────────────────────────────────────
-// CONCEPTS USED: props, .map(), useState (filter tabs), conditional rendering
+// ─── GameInformation.jsx ──────────────────────────────────────
+// CONCEPTS USED: JSX, useState, array filtering
 //
-// Features:
-//   - Filter buttons that show projects by category (useState)
-//   - Project cards with tag chips, links, and hover effects
-//   - "Featured" badge on highlighted projects
-//
-// 🔧 WORKSHOP TASKS:
-//   1. Replace the PROJECTS array with YOUR actual projects
-//   2. Add real GitHub links and live demo URLs
-//   3. Update tags to match the technologies YOU used
-//   4. Swap featured: true to your best project
+// This section displays the core database of the game.
+// It uses state to filter the displayed cards based on the selected category.
 
-import { useState } from 'react'
-'./GameInformation.css'
+import { useState } from 'react';
+import './GameInformation.css';
 
-// ── Projects data — replace with your own ─────────────────────
-const PROJECTS = [
+// Platform Images Import
+import cloudPlatform from '../../assets/platforms/Cloud_Platform.png';
+import icePlatform from '../../assets/platforms/Ice_Platform.png';
+import lavaPlatform from '../../assets/platforms/Lava_Platform.png';
+import normalPlatform from '../../assets/platforms/Normal_Platform.png';
+import waterPlatform from '../../assets/platforms/Water_Platform.png';
+
+// Wiki Database
+const wikiData = [
+  // ── Actual Platform Data ──────────────────────────────
   {
     id: 1,
-    title: 'Personal Portfolio',
-    description:
-      'The very website you\'re looking at! Built with React and Vite. Features smooth scroll, responsive design, and a dark theme.',
-    tags: ['React', 'Vite', 'CSS'],
-    category: 'Frontend',
-    github: 'https://github.com',
-    demo: '#',
-    featured: true,
-    emoji: '🚀',
+    title: 'Normal Platform',
+    category: 'Platforms',
+    description: 'A standard, stable rock platform. Reliable and safe for jumping.',
+    image: normalPlatform
   },
   {
     id: 2,
-    title: 'Weather Dashboard',
-    description:
-      'A real-time weather app that fetches data from the OpenWeather API. Shows current conditions and a 5-day forecast.',
-    tags: ['React', 'API', 'CSS Grid'],
-    category: 'Frontend',
-    github: 'https://github.com',
-    demo: 'https://example.com',
-    featured: false,
-    emoji: '⛅',
+    title: 'Lava Platform',
+    category: 'Platforms',
+    description: 'Scorching hot! Deals fire damage if you stand on it for too long.',
+    image: lavaPlatform
   },
   {
     id: 3,
-    title: 'Task Manager App',
-    description:
-      'A full-stack to-do app with user authentication, drag-and-drop tasks, and persistent storage with localStorage.',
-    tags: ['React', 'Node.js', 'CSS'],
-    category: 'Full Stack',
-    github: 'https://github.com',
-    demo: 'https://example.com',
-    featured: true,
-    emoji: '✅',
+    title: 'Ice Platform',
+    category: 'Platforms',
+    description: 'Very slippery surface. It is hard to control your momentum here.',
+    image: icePlatform
   },
   {
     id: 4,
-    title: 'E-commerce Product Page',
-    description:
-      'A pixel-perfect product page clone inspired by a popular e-commerce site. Includes image gallery and cart counter.',
-    tags: ['React', 'Context API', 'Styled Components'],
-    category: 'Frontend',
-    github: 'https://github.com',
-    demo: 'https://example.com',
-    featured: false,
-    emoji: '🛒',
+    title: 'Cloud Platform',
+    category: 'Platforms',
+    description: 'Fragile and ethereal. Disappears shortly after you step on it.',
+    image: cloudPlatform
   },
   {
     id: 5,
-    title: 'Blog REST API',
-    description:
-      'A RESTful API built with Node.js and Express. Supports CRUD operations for posts and comments with JWT auth.',
-    tags: ['Node.js', 'Express', 'MongoDB'],
-    category: 'Backend',
-    github: 'https://github.com',
-    demo: null,   // No live demo for backend projects
-    featured: false,
-    emoji: '🔌',
+    title: 'Water Platform',
+    category: 'Platforms',
+    description: 'Slows down your movement slightly, but extinguishes fire effects.',
+    image: waterPlatform
   },
+
+  // ── Dummy Data for Other Categories ───────────────────
   {
     id: 6,
-    title: 'Pomodoro Timer',
-    description:
-      'A productivity timer built with React and the Web Audio API. Features custom session lengths and notification sounds.',
-    tags: ['React', 'useState', 'useEffect'],
-    category: 'Frontend',
-    github: 'https://github.com',
-    demo: 'https://example.com',
-    featured: false,
-    emoji: '⏱️',
+    title: 'Ice Potion',
+    category: 'Items',
+    description: 'Freezes the rising lava for 5 seconds. Essential for tight spots!',
+    image: 'https://via.placeholder.com/300x200/222/fff?text=Item'
   },
-]
+  {
+    id: 7,
+    title: 'Obsidian Shield',
+    category: 'Equipment',
+    description: 'Grants immunity to one instance of fire damage. Highly durable.',
+    image: 'https://via.placeholder.com/300x200/222/fff?text=Equipment'
+  },
+  {
+    id: 8,
+    title: 'Ring of Agility',
+    category: 'Rings',
+    description: 'Increases base jump height by 15%. Perfect for speedrunners.',
+    image: 'https://via.placeholder.com/300x200/222/fff?text=Ring'
+  },
+  {
+    id: 9,
+    title: 'Lava Leaper',
+    category: 'Characters',
+    description: 'The default character. Balanced stats, good for beginners.',
+    image: 'https://via.placeholder.com/300x200/222/fff?text=Character'
+  }
+];
 
-// All unique categories extracted from projects data
-const ALL_CATEGORIES = ['All', ...new Set(PROJECTS.map((p) => p.category))]
+// The filter categories
+const categories = ['Platforms', 'Items', 'Equipment', 'Rings', 'Characters'];
 
-// ── ProjectCard: renders a single project ─────────────────────
-function ProjectCard({ title, description, tags, github, demo, featured, emoji }) {
-  return (
-    <article className={`project-card ${featured ? 'project-card--featured' : ''}`}>
+function GameInformation() {
+  // Set the default active category to the first item in the list ('Platforms')
+  const [activeCategory, setActiveCategory] = useState('Platforms');
 
-      {/* Featured badge */}
-      {featured && (
-        <span className="project-card__featured-badge">⭐ Featured</span>
-      )}
-
-      {/* Emoji / icon */}
-      <div className="project-card__emoji">{emoji}</div>
-
-      {/* Title */}
-      <h3 className="project-card__title">{title}</h3>
-
-      {/* Description */}
-      <p className="project-card__description">{description}</p>
-
-      {/* Tag chips */}
-      <div className="project-card__tags">
-        {tags.map((tag) => (
-          <span key={tag} className="project-card__tag">
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      {/* Links */}
-      <div className="project-card__links">
-        <a
-          href={github}
-          target="_blank"
-          rel="noreferrer"
-          className="project-card__link"
-        >
-          GitHub →
-        </a>
-        {/* Only show demo link if a URL exists */}
-        {demo && (
-          <a
-            href={demo}
-            target="_blank"
-            rel="noreferrer"
-            className="project-card__link project-card__link--demo"
-          >
-            Live Demo ↗
-          </a>
-        )}
-      </div>
-    </article>
-  )
-}
-
-// ── Projects: main section component ──────────────────────────
-function Projects() {
-  // useState: track which filter tab is active
-  // When activeCategory changes, the displayed projects change too
-  const [activeCategory, setActiveCategory] = useState('All')
-
-  // Filter the projects array based on the active category
-  // If "All" is selected, show every project
-  const filteredProjects = activeCategory === 'All'
-    ? PROJECTS
-    : PROJECTS.filter((p) => p.category === activeCategory)
+  // Filter logic: Only show items that match the active category
+  const filteredData = wikiData.filter(item => item.category === activeCategory);
 
   return (
-    <section id="game-information" className="game-information">
+    <section id="game-information" className="projects">
       <div className="section-wrapper">
-
+        
+        {/* ── Section Header ────────────────────────────────────── */}
         <h2 className="section-title">
-          My <span className="accent">Projects</span>
+          Game <span className="accent">Information</span>
         </h2>
         <p className="section-subtitle">
-          Things I've built — from learning exercises to real-world apps
+          Explore the ultimate database for your escape.
         </p>
 
-        {/* ── Filter tabs ──────────────────────────────────── */}
+        {/* ── Filter Tabs ───────────────────────────────────────── */}
         <div className="projects__filters">
-          {ALL_CATEGORIES.map((category) => (
+          {categories.map(category => (
             <button
               key={category}
-              className={`projects__filter-btn ${
-                activeCategory === category ? 'projects__filter-btn--active' : ''
-              }`}
+              className={`projects__filter-btn ${activeCategory === category ? 'active' : ''}`}
               onClick={() => setActiveCategory(category)}
             >
               {category}
@@ -186,31 +119,25 @@ function Projects() {
           ))}
         </div>
 
-        {/* ── Project grid ─────────────────────────────────── */}
+        {/* ── Grid of Wiki Cards ────────────────────────────────── */}
         <div className="projects__grid">
-          {filteredProjects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              title={project.title}
-              description={project.description}
-              tags={project.tags}
-              category={project.category}
-              github={project.github}
-              demo={project.demo}
-              featured={project.featured}
-              emoji={project.emoji}
-            />
+          {filteredData.map(item => (
+            <div key={item.id} className="projects__card">
+              <div className="projects__card-img-wrap">
+                <img src={item.image} alt={item.title} className="projects__card-img" />
+              </div>
+              <div className="projects__card-content">
+                <h3 className="projects__card-title">{item.title}</h3>
+                <span className="projects__card-badge">{item.category}</span>
+                <p className="projects__card-desc">{item.description}</p>
+              </div>
+            </div>
           ))}
         </div>
 
-        {/* Empty state — shown when filter returns no results */}
-        {filteredProjects.length === 0 && (
-          <p className="projects__empty">No projects in this category yet!</p>
-        )}
-
       </div>
     </section>
-  )
+  );
 }
 
-export default Projects
+export default GameInformation;

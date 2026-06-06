@@ -1,179 +1,111 @@
-/* ─── Projects.css ───────────────────────────────────────────── */
+/* ─── GameInformation.css ────────────────────────────────────── */
 
+/* Base container padding */
 .projects {
-  background: transparent;
-  border-top: 1px solid #1a1a1a;
-  border-bottom: 1px solid #1a1a1a;
+  padding: 100px 0;
 }
 
-/* ── Filter Tabs ───────────────────────────────────────────── */
+/* Filter buttons container */
 .projects__filters {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 40px;
 }
 
+/* Individual filter button styles */
 .projects__filter-btn {
-  padding: 8px 20px;
-  border-radius: 100px;
-  border: 1.5px solid #2a2a2a;
-  background: transparent;
-  color: #888;
-  font-size: 0.85rem;
-  font-weight: 500;
+  background: var(--code-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 6px;
   cursor: pointer;
-  font-family: inherit;
+  font-weight: 600;
   transition: all 0.2s ease;
+  font-family: inherit;
 }
 
 .projects__filter-btn:hover {
-  border-color: #444;
-  color: #ccc;
-}
-
-.projects__filter-btn--active {
-  background: var(--accent);
   border-color: var(--accent);
-  color: #0f0f0f;
-  font-weight: 600;
 }
 
-/* ── Project Grid ──────────────────────────────────────────── */
+/* Active state for the clicked filter button */
+.projects__filter-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(255, 87, 34, 0.4); /* Subtle magma glow */
+}
+
+/* Grid layout for the cards */
 .projects__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 24px;
 }
 
-/* ── Project Card ──────────────────────────────────────────── */
-.project-card {
-  background: #161616;
-  border: 1px solid #222;
-  border-radius: 16px;
-  padding: 28px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  position: relative;
-  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+/* Wiki card styling */
+.projects__card {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.project-card:hover {
-  border-color: var(--accent-bg);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+.projects__card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Featured card gets a subtle glow */
-.project-card--featured {
-  border-color: var(--accent-bg);
-  background: linear-gradient(135deg, #161616 0%, #131e26 100%);
+/* Image wrapper to perfectly center and give breathing room */
+.projects__card-img-wrap {
+  height: 140px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px; /* Adds space around so it doesn't touch the edges */
 }
 
-.project-card--featured::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), #4fc8e8);
+.projects__card-img {
+  width: 100%; /* Forces the image to stretch... */
+  height: 100%; /* ...but respects the container size */
+  object-fit: contain; /* Scales up perfectly without any cropping */
+  image-rendering: pixelated; /* Keeps the retro pixels crisp */
 }
 
-/* ── Featured badge ────────────────────────────────────────── */
-.project-card__featured-badge {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 100px;
-  background: var(--accent-bg);
-  color: var(--accent);
-  border: 1px solid var(--accent-bg);
+/* Text content area inside the card */
+.projects__card-content {
+  padding: 20px;
 }
 
-/* ── Emoji ─────────────────────────────────────────────────── */
-.project-card__emoji {
-  font-size: 2rem;
-  line-height: 1;
-}
-
-/* ── Title ─────────────────────────────────────────────────── */
-.project-card__title {
-  font-size: 1.1rem;
+.projects__card-title {
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #e8e8e8;
-  margin-top: 4px;
+  color: var(--text-h);
+  margin: 0 0 8px 0;
 }
 
-/* ── Description ───────────────────────────────────────────── */
-.project-card__description {
+/* Category badge (e.g., 'Items', 'Rings') */
+.projects__card-badge {
+  display: inline-block;
+  background: var(--bg);
+  color: var(--accent);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+  border: 1px solid var(--accent);
+}
+
+.projects__card-desc {
   font-size: 0.9rem;
-  color: #888;
-  line-height: 1.7;
-  flex: 1;  /* Pushes tags + links to bottom */
-}
-
-/* ── Tag chips ─────────────────────────────────────────────── */
-.project-card__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.project-card__tag {
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 6px;
-  background: #1e1e1e;
-  color: #888;
-  border: 1px solid #2a2a2a;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
-
-/* ── Links ─────────────────────────────────────────────────── */
-.project-card__links {
-  display: flex;
-  gap: 16px;
-  padding-top: 4px;
-  border-top: 1px solid #1e1e1e;
-}
-
-.project-card__link {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #666;
-  transition: color 0.2s;
-}
-
-.project-card__link:hover {
-  color: var(--accent);
-}
-
-.project-card__link--demo {
-  color: var(--accent);
-}
-.project-card__link--demo:hover {
-  color: #4fc8e8;
-}
-
-/* ── Empty state ───────────────────────────────────────────── */
-.projects__empty {
-  text-align: center;
-  color: #555;
-  padding: 60px 0;
-  font-size: 1rem;
-}
-
-/* ── Responsive ────────────────────────────────────────────── */
-@media (max-width: 600px) {
-  .projects__grid {
-    grid-template-columns: 1fr;
-  }
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
 }

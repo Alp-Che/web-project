@@ -1,0 +1,117 @@
+/* ─── About.css ──────────────────────────────────────────────── */
+
+.about {
+  background: transparent;
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* ── Bio ───────────────────────────────────────────────────── */
+.about__bio {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about__bio p {
+  color: #aaa;
+  line-height: 1.8;
+  font-size: 0.975rem;
+}
+
+.about__fun-fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--accent-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  color: #aaa;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.about__fun-fact-icon {
+  font-size: 1.4rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.about__fun-fact strong {
+  color: #ddd;
+}
+
+/* ── Stats ─────────────────────────────────────────────────── */
+.about__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.about__stat-card {
+  background: #1a1a1a;
+  border: 1px solid #252525;
+  border-radius: 12px;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.about__stat-card:hover {
+  border-color: var(--accent-bg);
+  transform: translateY(-2px);
+}
+
+.about__stat-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.about__stat-label {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ── Photo Placeholder ─────────────────────────────────────── */
+.about__photo {
+  grid-column: 1 / -1;  /* Spans both columns */
+  display: flex;
+  justify-content: center;
+}
+
+.about__photo-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a2a3a, #0f1a24);
+  border: 2px solid var(--accent-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

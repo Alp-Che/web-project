@@ -1,0 +1,238 @@
+/* ─── Contact.css ────────────────────────────────────────────── */
+
+.contact {
+  background: transparent;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* ── Info Panel ────────────────────────────────────────────── */
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.contact__info-intro {
+  color: #888;
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+.contact__info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact__info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.contact__info-icon {
+  font-size: 1.4rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #1a1a1a;
+  border: 1px solid #252525;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  padding: 8px;
+}
+
+.contact__info-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.contact__info-value {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.contact__info-value--link {
+  transition: color 0.2s;
+}
+.contact__info-value--link:hover {
+  color: var(--accent);
+}
+
+/* ── Form ──────────────────────────────────────────────────── */
+.contact__form-wrap {
+  background: #161616;
+  border: 1px solid #222;
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Two-column row (name + email) */
+.contact__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Field wrapper ─────────────────────────────────────────── */
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #aaa;
+}
+
+.contact__required {
+  color: var(--accent);
+}
+
+/* ── Input & Textarea ──────────────────────────────────────── */
+.contact__input {
+  background: #1e1e1e;
+  border: 1.5px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+}
+
+.contact__input::placeholder {
+  color: #444;
+}
+
+.contact__input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.contact__input--error {
+  border-color: #e05050;
+}
+.contact__input--error:focus {
+  box-shadow: 0 0 0 3px rgba(224, 80, 80, 0.1);
+}
+
+.contact__textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* ── Char count ────────────────────────────────────────────── */
+.contact__char-count {
+  font-size: 0.75rem;
+  color: #444;
+  text-align: right;
+  margin-top: -2px;
+}
+
+/* ── Error message ─────────────────────────────────────────── */
+.contact__error {
+  font-size: 0.8rem;
+  color: #e05050;
+  margin-top: -2px;
+}
+
+/* ── Submit button ─────────────────────────────────────────── */
+.contact__submit {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  padding: 14px 28px;
+  cursor: pointer;
+  border: none;
+}
+
+.contact__submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Spinner ───────────────────────────────────────────────── */
+.contact__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(15, 15, 15, 0.3);
+  border-top-color: #0f0f0f;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Success message ───────────────────────────────────────── */
+.contact__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 40px 20px;
+}
+
+.contact__success-icon {
+  font-size: 3.5rem;
+}
+
+.contact__success h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.contact__success p {
+  color: #888;
+  line-height: 1.6;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 540px) {
+  .contact__row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__form-wrap {
+    padding: 24px 20px;
+  }
+}

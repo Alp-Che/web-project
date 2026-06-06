@@ -1,113 +1,70 @@
 // ─── Home.jsx ─────────────────────────────────────────────────
-// CONCEPTS USED: JSX, props (none here — data is inside this file)
+// CONCEPTS USED: JSX, importing image assets, flexbox layouts
 //
 // The Home section is the first thing visitors see.
-// It shows your name, role, a short tagline, and two CTA buttons.
+// It features the main game logo in the center, flanked by
+// platform store links (Steam, App Store, PlayStation, etc.) on the sides.
 //
 // 🔧 WORKSHOP TASKS:
-//   1. Replace the name, role, tagline, and location with YOUR info
-//   2. Update the avatar initials at the bottom
+//   1. Import platform logos from the assets folder.
+//   2. Structure the layout: Left Links <- Main Logo -> Right Links.
+//   3. Add hover effects to the game links.
 
 import './Home.css'
 
+// Main Game Logo
+import gameLogo from '../../assets/game_logo.png'
+
+// Platform Logos
+import steamLogo from '../../assets/Steam_Logo.png'
+import playStoreLogo from '../../assets/PlayStore_Logo.png'
+import appStoreLogo from '../../assets/AppStore_Logo.png'
+import ps4Logo from '../../assets/PS4_Logo.png'
+import xboxLogo from '../../assets/XBOX_Logo.png'
+import nintendoLogo from '../../assets/Nintendo_Logo.png'
 
 function Home() {
   return (
-    <section id="home" className="home">
-      <div className="home__inner section-wrapper">
-
-        {/* ── Left: Text Content ──────────────────────────── */}
-        <div className="home__text">
-
-          {/* Greeting badge */}
-          <span className="home__badge">👋 Available for hire</span>
-
-          {/* Main heading — put YOUR name here */}
-          <h1 className="home__heading">
-            Hi, I'm <span className="accent">Alex Johnson</span>
-          </h1>
-
-          {/* Your role / title */}
-          <h2 className="home__role">
-            Frontend Developer & React Enthusiast
-          </h2>
-
-          {/* A short tagline — one punchy sentence about you */}
-          <p className="home__tagline">
-            I build clean, responsive web apps that users love.
-            Currently studying Computer Science at XYZ University.
-          </p>
-
-          {/* Location */}
-          <p className="home__location">
-            📍 Istanbul, Turkey
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="home__buttons">
-            <a href="#projects" className="btn btn--primary">
-              See My Work
-            </a>
-            <a href="#contact" className="btn btn--outline">
-              Get In Touch
-            </a>
-          </div>
-
-          {/* Social links */}
-          <div className="home__socials">
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noreferrer"
-              className="home__social-link"
-            >
-              GitHub
-            </a>
-            <span className="home__social-divider">·</span>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noreferrer"
-              className="home__social-link"
-            >
-              LinkedIn
-            </a>
-            <span className="home__social-divider">·</span>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="home__social-link"
-            >
-              Resume ↗
-            </a>
-          </div>
+    <section id="home" className="home-section">
+      <div className="home__layout section-wrapper">
+        
+        {/* ── Left Links ────────────────────────────── */}
+        <div className="home__links">
+          {/* Update the href attribute with your actual Steam store URL */}
+          <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" className="home__link-item">
+            <img src={steamLogo} alt="Steam" className="home__platform-img" />
+          </a>
+          {/* Update the href attribute with your actual Play Store URL */}
+          <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer" className="home__link-item">
+            <img src={playStoreLogo} alt="Play Store" className="home__platform-img" />
+          </a>
+          {/* Update the href attribute with your actual App Store URL */}
+          <a href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer" className="home__link-item">
+            <img src={appStoreLogo} alt="App Store" className="home__platform-img" />
+          </a>
         </div>
 
-        {/* ── Right: Avatar / Photo ───────────────────────── */}
-        <div className="home__avatar-wrap">
-          {/*
-            Replace this div with an <img> tag when you have a photo:
-            <img src="/your-photo.jpg" alt="Alex Johnson" className="home__avatar-img" />
-          */}
-          <div className="home__avatar">
-            <span className="home__avatar-initials">AJ</span>
-          </div>
-
-          {/* Floating badge cards around the avatar */}
-          <div className="home__badge-card home__badge-card--top">
-            ⚛️ React Developer
-          </div>
-          <div className="home__badge-card home__badge-card--bottom">
-            🚀 Open to Work
-          </div>
+        {/* ── Center Main Logo ──────────────────────── */}
+        <div className="home__center">
+          <img src={gameLogo} alt="Cendro Game" className="home__main-logo" />
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="home__scroll-hint">
-        <span>Scroll down</span>
-        <div className="home__scroll-arrow" />
+        {/* ── Right Links ───────────────────────────── */}
+        <div className="home__links">
+          {/* Update the href attribute with your actual PlayStation store URL */}
+          <a href="https://store.playstation.com/" target="_blank" rel="noopener noreferrer" className="home__link-item">
+            <img src={ps4Logo} alt="PlayStation 4" className="home__platform-img" />
+          </a>
+          {/* Update the href attribute with your actual Xbox store URL */}
+          <a href="https://www.xbox.com/games" target="_blank" rel="noopener noreferrer" className="home__link-item">
+            <img src={xboxLogo} alt="Xbox One" className="home__platform-img" />
+          </a>
+          {/* Update the href attribute with your actual Nintendo store URL */}
+          <a href="https://www.nintendo.com/store/" target="_blank" rel="noopener noreferrer" className="home__link-item">
+            <img src={nintendoLogo} alt="Nintendo Switch" className="home__platform-img" />
+          </a>
+        </div>
+
       </div>
     </section>
   )

@@ -1,271 +1,82 @@
-/* ─── home.css ───────────────────────────────────────────────── */
+/* ─── Home.css ───────────────────────────────────────────────── */
 
-.home {
+/* Main section settings (Transparent background to reveal the magma theme) */
+.home-section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative;
-  background: radial-gradient(ellipse at 70% 50%,var(--accent-bg) 0%, transparent 60%),
-              transparent;
+  background: transparent; 
+  padding-top: 68px; /* Prevents overlap with the fixed navbar */
 }
 
-.home__inner {
+/* 3-Column Flexbox Layout */
+.home__layout {
   display: flex;
   align-items: center;
-  gap: 64px;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
 }
 
-/* ── Text Side ─────────────────────────────────────────────── */
-.home__text {
-  flex: 1;
+/* Link Columns (Stacked vertically) */
+.home__links {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 32px;
+  flex: 1; /* Ensures side columns take up equal space */
 }
 
-.home__badge {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 100px;
-  background:var(--accent-bg);
-  color: var(--accent);
-  border: 1px solid var(--accent-bg);
-  width: fit-content;
-}
-
-.home__heading {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 800;
-  line-height: 1.15;
-  color: #ffffff;
-  letter-spacing: -1px;
-}
-
-.home__role {
-  font-size: clamp(1rem, 2.5vw, 1.35rem);
-  font-weight: 500;
-  color: #888;
-  margin-top: -8px;
-}
-
-.home__tagline {
-  font-size: 1rem;
-  color: #aaa;
-  max-width: 480px;
-  line-height: 1.7;
-}
-
-.home__location {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* ── Buttons ───────────────────────────────────────────────── */
-.home__buttons {
+/* Link Items and Hover Effects */
+.home__link-item {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 8px;
+  justify-content: center;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.btn {
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  cursor: pointer;
+.home__link-item:hover {
+  transform: scale(1.1); /* Scales up by 10% on hover */
+  filter: drop-shadow(0 0 10px var(--accent)); /* Emits a bright magma glow */
 }
 
-.btn--primary {
-  background: var(--accent);
-  color: #0f0f0f;
-}
-.btn--primary:hover {
-  background: #4fc8e8;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px var(--accent-bg);
+/* Platform Logo Dimensions */
+.home__platform-img {
+  height: 60px; /* Adjust size as needed */
+  width: auto;
+  object-fit: contain;
+  image-rendering: pixelated; /* Preserves pixel art texture */
 }
 
-.btn--outline {
-  border: 1.5px solid #333;
-  color: #ccc;
-  background: transparent;
-}
-.btn--outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
-}
-
-/* ── Social Links ──────────────────────────────────────────── */
-.home__socials {
+/* Center Main Logo Settings */
+.home__center {
+  flex: 2; /* Gives more space to the center column */
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 4px;
-}
-
-.home__social-link {
-  font-size: 0.875rem;
-  color: #666;
-  transition: color 0.2s;
-}
-.home__social-link:hover { color: var(--accent); }
-
-.home__social-divider {
-  color: #333;
-}
-
-/* ── Avatar Side ───────────────────────────────────────────── */
-.home__avatar-wrap {
-  flex-shrink: 0;
-  position: relative;
-  width: 340px;
-  height: 340px;
-  display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-.home__avatar {
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1a2a3a 0%, #0f1a24 100%);
-  border: 2px solid var(--accent-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Glowing ring behind avatar */
-.home__avatar::before {
-  content: '';
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0%,
-   var(--accent-bg) 25%,
-    transparent 50%
-  );
-  animation: spin 4s linear infinite;
-  z-index: -1;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.home__avatar-initials {
-  font-size: 5rem;
-  font-weight: 800;
-  color: var(--accent);
-  letter-spacing: -2px;
-}
-
-/* When you have a real photo */
-.home__avatar-img {
+.home__main-logo {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
+  max-width: 500px; /* Prevents the logo from becoming too massive */
+  image-rendering: pixelated;
+  animation: float 4s ease-in-out infinite; /* Gentle floating effect */
 }
 
-/* ── Floating badge cards ──────────────────────────────────── */
-.home__badge-card {
-  position: absolute;
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  border-radius: 10px;
-  padding: 10px 16px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #ccc;
-  white-space: nowrap;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  animation: float 3s ease-in-out infinite;
-}
-
-.home__badge-card--top {
-  top: 20px;
-  right: -10px;
-  animation-delay: 0s;
-}
-
-.home__badge-card--bottom {
-  bottom: 30px;
-  left: -10px;
-  animation-delay: 1.5s;
-}
-
+/* Float Animation */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
+  50%       { transform: translateY(-15px); }
 }
 
-/* ── Scroll hint ───────────────────────────────────────────── */
-.home__scroll-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: #444;
-  font-size: 0.75rem;
-  animation: fadeInUp 1s ease 1s both;
-}
-
-.home__scroll-arrow {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, #444, transparent);
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-
-/* ── Responsive ────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .home__inner {
-    flex-direction: column-reverse;
-    text-align: center;
-    gap: 40px;
-    padding-top: 100px;
+/* Responsive Design for Mobile Devices */
+@media (max-width: 900px) {
+  .home__layout {
+    flex-direction: column; /* Stacks everything vertically on mobile */
+    gap: 60px;
   }
 
-  .home__badge,
-  .home__buttons,
-  .home__socials {
-    margin-left: auto;
-    margin-right: auto;
+  .home__links {
+    flex-direction: row; /* Places links side-by-side on mobile */
+    flex-wrap: wrap;
     justify-content: center;
   }
-
-  .home__tagline { max-width: 100%; }
-
-  .home__avatar-wrap {
-    width: 240px;
-    height: 240px;
-  }
-
-  .home__avatar {
-    width: 180px;
-    height: 180px;
-  }
-
-  .home__badge-card { display: none; }
 }

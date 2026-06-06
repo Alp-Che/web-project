@@ -1,6 +1,6 @@
-/* ─── Hero.css ───────────────────────────────────────────────── */
+/* ─── home.css ───────────────────────────────────────────────── */
 
-.hero {
+.home {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,21 +10,21 @@
               transparent;
 }
 
-.hero__inner {
+.home__inner {
   display: flex;
   align-items: center;
   gap: 64px;
 }
 
 /* ── Text Side ─────────────────────────────────────────────── */
-.hero__text {
+.home__text {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.hero__badge {
+.home__badge {
   display: inline-block;
   font-size: 0.8rem;
   font-weight: 600;
@@ -36,7 +36,7 @@
   width: fit-content;
 }
 
-.hero__heading {
+.home__heading {
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 800;
   line-height: 1.15;
@@ -44,27 +44,27 @@
   letter-spacing: -1px;
 }
 
-.hero__role {
+.home__role {
   font-size: clamp(1rem, 2.5vw, 1.35rem);
   font-weight: 500;
   color: #888;
   margin-top: -8px;
 }
 
-.hero__tagline {
+.home__tagline {
   font-size: 1rem;
   color: #aaa;
   max-width: 480px;
   line-height: 1.7;
 }
 
-.hero__location {
+.home__location {
   font-size: 0.9rem;
   color: #666;
 }
 
 /* ── Buttons ───────────────────────────────────────────────── */
-.hero__buttons {
+.home__buttons {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
@@ -103,26 +103,26 @@
 }
 
 /* ── Social Links ──────────────────────────────────────────── */
-.hero__socials {
+.home__socials {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-top: 4px;
 }
 
-.hero__social-link {
+.home__social-link {
   font-size: 0.875rem;
   color: #666;
   transition: color 0.2s;
 }
-.hero__social-link:hover { color: var(--accent); }
+.home__social-link:hover { color: var(--accent); }
 
-.hero__social-divider {
+.home__social-divider {
   color: #333;
 }
 
 /* ── Avatar Side ───────────────────────────────────────────── */
-.hero__avatar-wrap {
+.home__avatar-wrap {
   flex-shrink: 0;
   position: relative;
   width: 340px;
@@ -132,7 +132,7 @@
   justify-content: center;
 }
 
-.hero__avatar {
+.home__avatar {
   width: 260px;
   height: 260px;
   border-radius: 50%;
@@ -146,7 +146,7 @@
 }
 
 /* Glowing ring behind avatar */
-.hero__avatar::before {
+.home__avatar::before {
   content: '';
   position: absolute;
   inset: -8px;
@@ -165,7 +165,7 @@
   to { transform: rotate(360deg); }
 }
 
-.hero__avatar-initials {
+.home__avatar-initials {
   font-size: 5rem;
   font-weight: 800;
   color: var(--accent);
@@ -173,7 +173,7 @@
 }
 
 /* When you have a real photo */
-.hero__avatar-img {
+.home__avatar-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -181,7 +181,7 @@
 }
 
 /* ── Floating badge cards ──────────────────────────────────── */
-.hero__badge-card {
+.home__badge-card {
   position: absolute;
   background: #1a1a1a;
   border: 1px solid #2a2a2a;
@@ -195,13 +195,13 @@
   animation: float 3s ease-in-out infinite;
 }
 
-.hero__badge-card--top {
+.home__badge-card--top {
   top: 20px;
   right: -10px;
   animation-delay: 0s;
 }
 
-.hero__badge-card--bottom {
+.home__badge-card--bottom {
   bottom: 30px;
   left: -10px;
   animation-delay: 1.5s;
@@ -213,7 +213,7 @@
 }
 
 /* ── Scroll hint ───────────────────────────────────────────── */
-.hero__scroll-hint {
+.home__scroll-hint {
   position: absolute;
   bottom: 32px;
   left: 50%;
@@ -227,7 +227,7 @@
   animation: fadeInUp 1s ease 1s both;
 }
 
-.hero__scroll-arrow {
+.home__scroll-arrow {
   width: 1px;
   height: 40px;
   background: linear-gradient(to bottom, #444, transparent);
@@ -240,32 +240,32 @@
 
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .hero__inner {
+  .home__inner {
     flex-direction: column-reverse;
     text-align: center;
     gap: 40px;
     padding-top: 100px;
   }
 
-  .hero__badge,
-  .hero__buttons,
-  .hero__socials {
+  .home__badge,
+  .home__buttons,
+  .home__socials {
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
   }
 
-  .hero__tagline { max-width: 100%; }
+  .home__tagline { max-width: 100%; }
 
-  .hero__avatar-wrap {
+  .home__avatar-wrap {
     width: 240px;
     height: 240px;
   }
 
-  .hero__avatar {
+  .home__avatar {
     width: 180px;
     height: 180px;
   }
 
-  .hero__badge-card { display: none; }
+  .home__badge-card { display: none; }
 }

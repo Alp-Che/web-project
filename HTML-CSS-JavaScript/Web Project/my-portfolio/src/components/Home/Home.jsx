@@ -1,7 +1,7 @@
-// ─── Hero.jsx ─────────────────────────────────────────────────
+// ─── Home.jsx ─────────────────────────────────────────────────
 // CONCEPTS USED: JSX, props (none here — data is inside this file)
 //
-// The Hero section is the first thing visitors see.
+// The Home section is the first thing visitors see.
 // It shows your name, role, a short tagline, and two CTA buttons.
 //
 // 🔧 WORKSHOP TASKS:
@@ -10,40 +10,41 @@
 
 import './Home.css'
 
-function Hero() {
+
+function Home() {
   return (
-    <section id="hero" className="hero">
-      <div className="hero__inner section-wrapper">
+    <section id="home" className="home">
+      <div className="home__inner section-wrapper">
 
         {/* ── Left: Text Content ──────────────────────────── */}
-        <div className="hero__text">
+        <div className="home__text">
 
           {/* Greeting badge */}
-          <span className="hero__badge">👋 Available for hire</span>
+          <span className="home__badge">👋 Available for hire</span>
 
           {/* Main heading — put YOUR name here */}
-          <h1 className="hero__heading">
+          <h1 className="home__heading">
             Hi, I'm <span className="accent">Alex Johnson</span>
           </h1>
 
           {/* Your role / title */}
-          <h2 className="hero__role">
+          <h2 className="home__role">
             Frontend Developer & React Enthusiast
           </h2>
 
           {/* A short tagline — one punchy sentence about you */}
-          <p className="hero__tagline">
+          <p className="home__tagline">
             I build clean, responsive web apps that users love.
             Currently studying Computer Science at XYZ University.
           </p>
 
           {/* Location */}
-          <p className="hero__location">
+          <p className="home__location">
             📍 Istanbul, Turkey
           </p>
 
           {/* CTA Buttons */}
-          <div className="hero__buttons">
+          <div className="home__buttons">
             <a href="#projects" className="btn btn--primary">
               See My Work
             </a>
@@ -53,30 +54,30 @@ function Hero() {
           </div>
 
           {/* Social links */}
-          <div className="hero__socials">
+          <div className="home__socials">
             <a
               href="https://github.com"
               target="_blank"
               rel="noreferrer"
-              className="hero__social-link"
+              className="home__social-link"
             >
               GitHub
             </a>
-            <span className="hero__social-divider">·</span>
+            <span className="home__social-divider">·</span>
             <a
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="hero__social-link"
+              className="home__social-link"
             >
               LinkedIn
             </a>
-            <span className="hero__social-divider">·</span>
+            <span className="home__social-divider">·</span>
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noreferrer"
-              className="hero__social-link"
+              className="home__social-link"
             >
               Resume ↗
             </a>
@@ -84,32 +85,32 @@ function Hero() {
         </div>
 
         {/* ── Right: Avatar / Photo ───────────────────────── */}
-        <div className="hero__avatar-wrap">
+        <div className="home__avatar-wrap">
           {/*
             Replace this div with an <img> tag when you have a photo:
-            <img src="/your-photo.jpg" alt="Alex Johnson" className="hero__avatar-img" />
+            <img src="/your-photo.jpg" alt="Alex Johnson" className="home__avatar-img" />
           */}
-          <div className="hero__avatar">
-            <span className="hero__avatar-initials">AJ</span>
+          <div className="home__avatar">
+            <span className="home__avatar-initials">AJ</span>
           </div>
 
           {/* Floating badge cards around the avatar */}
-          <div className="hero__badge-card hero__badge-card--top">
+          <div className="home__badge-card home__badge-card--top">
             ⚛️ React Developer
           </div>
-          <div className="hero__badge-card hero__badge-card--bottom">
+          <div className="home__badge-card home__badge-card--bottom">
             🚀 Open to Work
           </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="hero__scroll-hint">
+      <div className="home__scroll-hint">
         <span>Scroll down</span>
-        <div className="hero__scroll-arrow" />
+        <div className="home__scroll-arrow" />
       </div>
     </section>
   )
 }
 
-export default Hero
+export default Home

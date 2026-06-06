@@ -10,7 +10,7 @@
 //   4. Loading state on the submit button
 //
 // 🔧 WORKSHOP TASKS:
-//   1. Update the email / social links to YOUR real contacts
+//   1. Update the email / social links to YOUR real feedbacks
 //   2. Optionally wire up a real form service like Formspree
 
 import { useState } from 'react'
@@ -133,7 +133,7 @@ function Contact() {
 
   // ── Render ───────────────────────────────────────────────────
   return (
-    <section id="contact" className="contact">
+    <section id="feedback" className="feedback">
       <div className="section-wrapper">
 
         <h2 className="section-title">
@@ -143,32 +143,32 @@ function Contact() {
           Have a project in mind or just want to say hi? I'd love to hear from you!
         </p>
 
-        <div className="contact__grid">
+        <div className="feedback__grid">
 
           {/* ── Left: Contact info ───────────────────────── */}
-          <div className="contact__info">
-            <p className="contact__info-intro">
+          <div className="feedback__info">
+            <p className="feedback__info-intro">
               I'm currently open to freelance projects and internship
               opportunities. Response time: usually within 24 hours.
             </p>
 
-            <div className="contact__info-items">
+            <div className="feedback__info-items">
               {CONTACT_INFO.map((item) => (
-                <div key={item.label} className="contact__info-item">
-                  <span className="contact__info-icon">{item.icon}</span>
+                <div key={item.label} className="feedback__info-item">
+                  <span className="feedback__info-icon">{item.icon}</span>
                   <div>
-                    <span className="contact__info-label">{item.label}</span>
+                    <span className="feedback__info-label">{item.label}</span>
                     {item.href ? (
                       <a
                         href={item.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="contact__info-value contact__info-value--link"
+                        className="feedback__info-value feedback__info-value--link"
                       >
                         {item.value}
                       </a>
                     ) : (
-                      <span className="contact__info-value">{item.value}</span>
+                      <span className="feedback__info-value">{item.value}</span>
                     )}
                   </div>
                 </div>
@@ -177,12 +177,12 @@ function Contact() {
           </div>
 
           {/* ── Right: Contact Form ──────────────────────── */}
-          <div className="contact__form-wrap">
+          <div className="feedback__form-wrap">
 
             {/* Success message — shown after submission */}
             {submitted ? (
-              <div className="contact__success">
-                <span className="contact__success-icon">🎉</span>
+              <div className="feedback__success">
+                <span className="feedback__success-icon">🎉</span>
                 <h3>Message Sent!</h3>
                 <p>Thanks for reaching out. I'll get back to you soon.</p>
                 <button
@@ -194,20 +194,20 @@ function Contact() {
               </div>
             ) : (
               /* The form — only shown when not yet submitted */
-              <form className="contact__form" onSubmit={handleSubmit} noValidate>
+              <form className="feedback__form" onSubmit={handleSubmit} noValidate>
 
                 {/* Name + Email row */}
-                <div className="contact__row">
-                  <div className="contact__field">
-                    <label htmlFor="name" className="contact__label">
-                      Name <span className="contact__required">*</span>
+                <div className="feedback__row">
+                  <div className="feedback__field">
+                    <label htmlFor="name" className="feedback__label">
+                      Name <span className="feedback__required">*</span>
                     </label>
                     <input
                       id="name"
                       name="name"
                       type="text"
-                      className={`contact__input ${
-                        touched.name && errors.name ? 'contact__input--error' : ''
+                      className={`feedback__input ${
+                        touched.name && errors.name ? 'feedback__input--error' : ''
                       }`}
                       placeholder="Alex Johnson"
                       value={form.name}
@@ -215,20 +215,20 @@ function Contact() {
                       onBlur={handleBlur}
                     />
                     {touched.name && errors.name && (
-                      <span className="contact__error">{errors.name}</span>
+                      <span className="feedback__error">{errors.name}</span>
                     )}
                   </div>
 
-                  <div className="contact__field">
-                    <label htmlFor="email" className="contact__label">
-                      Email <span className="contact__required">*</span>
+                  <div className="feedback__field">
+                    <label htmlFor="email" className="feedback__label">
+                      Email <span className="feedback__required">*</span>
                     </label>
                     <input
                       id="email"
                       name="email"
                       type="email"
-                      className={`contact__input ${
-                        touched.email && errors.email ? 'contact__input--error' : ''
+                      className={`feedback__input ${
+                        touched.email && errors.email ? 'feedback__input--error' : ''
                       }`}
                       placeholder="alex@example.com"
                       value={form.email}
@@ -236,22 +236,22 @@ function Contact() {
                       onBlur={handleBlur}
                     />
                     {touched.email && errors.email && (
-                      <span className="contact__error">{errors.email}</span>
+                      <span className="feedback__error">{errors.email}</span>
                     )}
                   </div>
                 </div>
 
                 {/* Subject */}
-                <div className="contact__field">
-                  <label htmlFor="subject" className="contact__label">
-                    Subject <span className="contact__required">*</span>
+                <div className="feedback__field">
+                  <label htmlFor="subject" className="feedback__label">
+                    Subject <span className="feedback__required">*</span>
                   </label>
                   <input
                     id="subject"
                     name="subject"
                     type="text"
-                    className={`contact__input ${
-                      touched.subject && errors.subject ? 'contact__input--error' : ''
+                    className={`feedback__input ${
+                      touched.subject && errors.subject ? 'feedback__input--error' : ''
                     }`}
                     placeholder="Internship opportunity / Project collaboration / Just saying hi"
                     value={form.subject}
@@ -259,47 +259,47 @@ function Contact() {
                     onBlur={handleBlur}
                   />
                   {touched.subject && errors.subject && (
-                    <span className="contact__error">{errors.subject}</span>
+                    <span className="feedback__error">{errors.subject}</span>
                   )}
                 </div>
 
                 {/* Message */}
-                <div className="contact__field">
-                  <label htmlFor="message" className="contact__label">
-                    Message <span className="contact__required">*</span>
+                <div className="feedback__field">
+                  <label htmlFor="message" className="feedback__label">
+                    Message <span className="feedback__required">*</span>
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     rows={6}
-                    className={`contact__input contact__textarea ${
-                      touched.message && errors.message ? 'contact__input--error' : ''
+                    className={`feedback__input feedback__textarea ${
+                      touched.message && errors.message ? 'feedback__input--error' : ''
                     }`}
                     placeholder="Tell me about your project or just say hello..."
                     value={form.message}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  <div className="contact__char-count">
+                  <div className="feedback__char-count">
                     {form.message.length} characters
                     {form.message.length > 0 && form.message.length < 20 && (
                       <span> (minimum 20)</span>
                     )}
                   </div>
                   {touched.message && errors.message && (
-                    <span className="contact__error">{errors.message}</span>
+                    <span className="feedback__error">{errors.message}</span>
                   )}
                 </div>
 
                 {/* Submit button */}
                 <button
                   type="submit"
-                  className="btn btn--primary contact__submit"
+                  className="btn btn--primary feedback__submit"
                   disabled={loading}
                 >
                   {loading ? (
                     <>
-                      <span className="contact__spinner" />
+                      <span className="feedback__spinner" />
                       Sending...
                     </>
                   ) : (

@@ -161,7 +161,7 @@ function Projects() {
     : PROJECTS.filter((p) => p.category === activeCategory)
 
   return (
-    <section id="projects" className="projects">
+    <section id="game-information" className="game-information">
       <div className="section-wrapper">
 
         <h2 className="section-title">

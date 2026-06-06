@@ -36,6 +36,11 @@
   transition: opacity 0.2s;
 }
 .navbar__logo:hover { opacity: 0.8; }
+.navbar__logo-img {
+  height: 70px; 
+  width: auto;
+  image-rendering: pixelated; 
+}
 
 /* ── Desktop Links ─────────────────────────────────────────── */
 .navbar__links {
@@ -66,17 +71,40 @@
 .navbar__link:hover { color: #ffffff; }
 .navbar__link:hover::after { width: 100%; }
 
-/* ── CTA Button ────────────────────────────────────────────── */
-.navbar__cta {
-  font-size: 0.875rem;
-  font-weight: 600;
-  padding: 8px 20px;
-  border-radius: 6px;
-  background: var(--accent);
-  color: #0f0f0f;
-  transition: background 0.2s, transform 0.15s;
-  white-space: nowrap;
+/* ── Search Bar ────────────────────────────────────────────── */
+.navbar__search {
+  display: flex;
+  align-items: center;
 }
+
+.navbar__search-input {
+  background: var(--code-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 16px;
+  color: var(--text-h);
+  font-size: 0.85rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 160px;
+}
+
+.navbar__search-input::placeholder {
+  color: var(--text);
+}
+
+
+.navbar__search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+
+@media (max-width: 768px) {
+  .navbar__search { display: none; }
+}
+
 .navbar__cta:hover {
   background: #4fc8e8;
   transform: translateY(-1px);

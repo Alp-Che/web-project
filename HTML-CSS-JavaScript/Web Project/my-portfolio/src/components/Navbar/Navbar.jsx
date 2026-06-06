@@ -8,6 +8,7 @@
 
 import { useState, useEffect } from 'react'
 import './Navbar.css'
+import logoImg from '../../assets/Logo.png';
 
 // ── Data: edit these links to match your sections ─────────────
 const NAV_LINKS = [
@@ -45,11 +46,11 @@ function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__inner">
+        
 
-        {/* ── Logo / Your Name ─────────────────────────────── */}
-        {/* 🔧 WORKSHOP TASK: Replace "YourName" with your name */}
-        <a href="#hero" className="navbar__logo">
-          Cendro<span className="accent">.</span>
+       {/* ── Logo ─────────────────────────────── */}
+        <a href="#home" className="navbar__logo">
+          <img src={logoImg} alt="Cendro Wiki" className="navbar__logo-img" />
         </a>
 
         {/* ── Desktop Links ────────────────────────────────── */}
@@ -63,10 +64,15 @@ function Navbar() {
           ))}
         </ul>
 
-        {/* ── CTA Button ───────────────────────────────────── */}
-        <a href="#contact" className="navbar__cta">
-          Hire Me
-        </a>
+        {/*────── Seach ────────────────── */}
+        <div className="navbar__search">
+          <input 
+            type="text" 
+            placeholder="Search..." 
+            className="navbar__search-input" 
+          />
+        </div>
+       
 
         {/* ── Hamburger (mobile only) ───────────────────────── */}
         <button

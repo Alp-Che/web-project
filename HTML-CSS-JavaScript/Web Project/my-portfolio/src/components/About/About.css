@@ -1,117 +1,93 @@
-/* ─── About.css ──────────────────────────────────────────────── */
-
-.about {
-  background: transparent;
-  border-top: 1px solid #1a1a1a;
-  border-bottom: 1px solid #1a1a1a;
-}
-
-.about__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
-}
-
-/* ── Bio ───────────────────────────────────────────────────── */
-.about__bio {
+/* ── Latest Update Box ─────────────────────────────────────── */
+.about__update-box {
+  background: linear-gradient(145deg, var(--bg), var(--code-bg)); /* Subtle depth gradient */
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent); /* Thick magma accent line on the left */
+  border-radius: 8px; /* Slightly sharper edges for gaming vibe */
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Deeper base shadow */
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.about__bio p {
-  color: #aaa;
-  line-height: 1.8;
-  font-size: 0.975rem;
-}
-
-.about__fun-fact {
-  display: flex;
-  align-items: flex-start;
   gap: 12px;
-  padding: 16px 20px;
-  background: var(--accent-bg);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 8px 8px 0;
-  color: #aaa;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.about__fun-fact-icon {
-  font-size: 1.4rem;
-  margin-top: 2px;
-  flex-shrink: 0;
+/* Subtle magma glow effect on hover */
+.about__update-box:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(255, 87, 34, 0.15); /* Adjust rgba color based on your exact accent */
 }
 
-.about__fun-fact strong {
-  color: #ddd;
+.about__update-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* ── Stats ─────────────────────────────────────────────────── */
-.about__stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+.about__update-icon {
+  font-size: 1.6rem;
 }
 
-.about__stat-card {
-  background: #1a1a1a;
-  border: 1px solid #252525;
-  border-radius: 12px;
-  padding: 28px 20px;
+/* Base header title */
+.about__update-header h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Stylish version badge */
+.update-version {
+  background: var(--code-bg);
+  color: var(--accent);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  border: 1px solid var(--accent);
+  letter-spacing: 1px;
+}
+
+.about__update-title {
+  font-size: 0.95rem;
+  color: var(--text-h);
+  font-style: italic;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed var(--border); /* Dashed line for wiki aesthetic */
+  padding-bottom: 16px;
+}
+
+.about__update-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  transition: border-color 0.2s, transform 0.2s;
+  gap: 12px;
 }
 
-.about__stat-card:hover {
-  border-color: var(--accent-bg);
-  transform: translateY(-2px);
+/* Custom square bullets for list items */
+.about__update-list li {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.6;
+  position: relative;
+  padding-left: 20px;
 }
 
-.about__stat-value {
-  font-size: 2.2rem;
-  font-weight: 800;
+.about__update-list li::before {
+  content: '->'; /* Pixel-art style square bullet */
   color: var(--accent);
-  line-height: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.7rem;
 }
 
-.about__stat-label {
-  font-size: 0.8rem;
-  color: #666;
-  text-align: center;
-  font-weight: 500;
-}
-
-/* ── Photo Placeholder ─────────────────────────────────────── */
-.about__photo {
-  grid-column: 1 / -1;  /* Spans both columns */
-  display: flex;
-  justify-content: center;
-}
-
-.about__photo-placeholder {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1a2a3a, #0f1a24);
-  border: 2px solid var(--accent-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--accent);
-}
-
-/* ── Responsive ────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .about__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
+.about__update-list strong {
+  color: var(--text-h);
 }

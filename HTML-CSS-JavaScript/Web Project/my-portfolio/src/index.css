@@ -37,6 +37,103 @@
   }
 }
 
+/* Creates the left semi-transparent wall */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 150px; /* Adjust the thickness of the wall here */
+  z-index: -2; /* Keeps it strictly in the background */
+  
+  /* Path to your wall asset */
+  background-image: url('./assets/wall.png');
+  background-repeat: repeat-y; 
+  background-position: top left;
+  
+  /* Retro styling and transparency */
+  image-rendering: pixelated; 
+  opacity: 0.3; /* 0.0 to 1.0 (0.3 is 30% visible) */
+  
+  pointer-events: none; /* Prevents the invisible box from blocking mouse clicks */
+}
+
+/* Creates the right semi-transparent wall */
+/* Creates the left semi-transparent wall */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 250px; /* Increased width for a thicker wall */
+  z-index: -2;
+  
+  background-image: url('./assets/wall.png');
+  background-repeat: repeat-y; 
+  background-position: top left;
+  
+  /* Forces the texture to scale up and fill the width completely */
+  background-size: 100% auto; 
+  
+  image-rendering: pixelated; 
+  opacity: 0.3; 
+  pointer-events: none; 
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  
+  /* DYNAMIC WIDTH CALCULATION:
+    This calculates the exact empty space on the left side of the screen.
+    IMPORTANT: Replace '600px' with EXACTLY HALF of your main container's max-width.
+    (e.g., If your main center box is max-width: 1200px, use 600px. If 1000px, use 500px)
+  */
+  width: calc(50vw - 600px); 
+  
+  z-index: -2;
+  
+  background-image: url('./assets/wall.png');
+  background-repeat: repeat; /* Tiles the texture seamlessly to fill any screen size */
+  background-position: top right; /* Anchors the texture perfectly to the center container's line */
+  background-size: 250px auto; /* Keeps the pixel art chunks large and retro */
+  
+  image-rendering: pixelated; 
+  opacity: 0.3; 
+  pointer-events: none; 
+}
+
+/* Creates the right semi-transparent wall */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  
+  /* Use the exact same calculation here */
+  width: calc(50vw - 600px); 
+  
+  z-index: -2;
+  
+  background-image: url('./assets/wall.png');
+  background-repeat: repeat;
+  background-position: top right; 
+  background-size: 250px auto; 
+  
+  image-rendering: pixelated;
+  opacity: 0.3; 
+  pointer-events: none;
+  
+  /* Flips the right wall horizontally so it mirrors the left side perfectly */
+  transform: scaleX(-1); 
+}
+
 html {
   scroll-behavior: smooth;
 }

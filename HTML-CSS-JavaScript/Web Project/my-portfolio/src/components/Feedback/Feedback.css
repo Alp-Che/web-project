@@ -3,8 +3,15 @@
 .feedback {
   position: relative;
   min-height: 100vh;
-  background-color: #0D1B2A; 
-  overflow: hidden;
+  
+  /* FIX: Removed the hardcoded blue background and set it to transparent 
+     so it inherits the main website background seamlessly. */
+  background-color: transparent; 
+  
+  overflow: hidden; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; 
 }
 
 /* 🌋 ALWAYS VISIBLE FIXED LAVA: Locked to viewport bottom */
@@ -50,11 +57,11 @@
   padding: 0 24px;
   
   opacity: 0;
-  /* 👻 FIX: Completely prevents ghost clicks and Tab key focusing when hidden */
+  /* Completely prevents ghost clicks and Tab key focusing when hidden */
   visibility: hidden; 
   
   transform: translateY(30px);
-  /* FIX: Added visibility to the transition settings for a smooth effect */
+  /* Added visibility to the transition settings for a smooth effect */
   transition: opacity 0.4s ease 0.3s, transform 0.4s ease 0.3s, visibility 0.4s ease 0.3s;
   
   margin-bottom: 0px; 
@@ -62,7 +69,7 @@
 
 .feedback__lava-content--visible {
   opacity: 1;
-  /* 👻 FIX: Makes the form clickable and visible again when lava expands */
+  /* Makes the form clickable and visible again when lava expands */
   visibility: visible; 
   transform: translateY(0);
 }

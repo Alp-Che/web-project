@@ -1,0 +1,213 @@
+/* ─── Developer.css ────────────────────────────────────────────── */
+
+/* Main Section Layout */
+.developer {
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.developer__container {
+  max-width: 1000px; /* Constrains the width for better readability */
+  width: 100%;
+  padding: 0 24px;
+}
+
+.developer__title {
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--text-h);
+  margin-bottom: 8px;
+}
+
+.developer__subtitle {
+  text-align: center;
+  color: var(--text);
+  margin-bottom: 48px;
+  font-style: italic;
+}
+
+/* Grid Layout: Profile on left (1 fraction), Info on right (2 fractions) */
+.developer__grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 32px;
+}
+
+/* ─── Profile Card ─── */
+.developer__profile-card {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow);
+  height: fit-content; /* Prevents the card from stretching unnecessarily */
+}
+
+/* Avatar styling */
+.developer__avatar-wrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--bg), var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  border: 2px solid var(--accent);
+}
+
+.developer__avatar-placeholder {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--accent);
+  letter-spacing: 2px;
+}
+
+.developer__name {
+  font-size: 1.5rem;
+  color: var(--text-h);
+  margin: 0 0 8px 0;
+}
+
+/* Role badge styling */
+.developer__role {
+  font-size: 0.9rem;
+  color: var(--accent);
+  background: rgba(255, 87, 34, 0.1); /* Subtle transparent background using your theme color */
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.developer__socials {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.developer__social-btn {
+  flex: 1;
+  padding: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.developer__social-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ─── Bio & Tech Stack ─── */
+.developer__info {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+
+.developer__info-title {
+  font-size: 1.2rem;
+  color: var(--text-h);
+  margin: 0 0 16px 0;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+/* Margin utility for sections below the first one */
+.developer__info-title--margin {
+  margin-top: 32px;
+}
+
+.developer__bio {
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+}
+
+/* Tech stack tags layout */
+.developer__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.developer__skill-tag {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-h);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  transition: border-color 0.2s ease;
+}
+
+.developer__skill-tag:hover {
+  border-color: var(--accent);
+}
+
+/* ─── Other Games Section ─── */
+.developer__other-games-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.developer__game-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 8px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.developer__game-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+.developer__game-card-icon {
+  font-size: 2rem;
+}
+
+.developer__game-card-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.developer__game-title {
+  color: var(--text-h);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.developer__game-genre {
+  color: var(--text);
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* ─── Responsive Design ─── */
+@media (max-width: 768px) {
+  .developer__grid {
+    grid-template-columns: 1fr; /* Stacks profile and info vertically on mobile */
+  }
+  .developer__other-games-grid {
+    grid-template-columns: 1fr; /* Stacks game cards vertically on mobile */
+  }
+}

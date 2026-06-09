@@ -1,320 +1,145 @@
-// ─── Contact.jsx ──────────────────────────────────────────────
-// CONCEPTS USED: useState, event handling, controlled inputs,
-//                form validation, conditional rendering
-//
-// This is the most feature-rich component in the workshop.
-// It demonstrates:
-//   1. Controlled form inputs (input value lives in state)
-//   2. Real-time validation (errors appear on blur)
-//   3. A success message shown after "sending" (simulated)
-//   4. Loading state on the submit button
-//
-// 🔧 WORKSHOP TASKS:
-//   1. Update the email / social links to YOUR real feedbacks
-//   2. Optionally wire up a real form service like Formspree
+// ─── Feedback.jsx ─────────────────────────────────────────────
+// CONCEPTS USED: Intersection Observer, Fixed Global Layout, Controlled Form
 
-import { useState } from 'react'
-import './Feedback.css'
+import React, { useState, useEffect, useRef } from 'react';
+import './Feedback.css';
+import lavaImg from '../../assets/Lava.png';
 
-// ── Contact info items — update with YOUR details ─────────────
-const CONTACT_INFO = [
-  {
-    icon: '✉️',
-    label: 'Email',
-    value: 'alex@example.com',
-    href: 'mailto:alex@example.com',
-  },
-  {
-    icon: '🐙',
-    label: 'GitHub',
-    value: 'github.com/yourhandle',
-    href: 'https://github.com',
-  },
-  {
-    icon: '💼',
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/yourname',
-    href: 'https://linkedin.com',
-  },
-  {
-    icon: '📍',
-    label: 'Location',
-    value: 'Istanbul, Turkey',
-    href: null,   // No link for location
-  },
-]
+function Feedback() {
+  const [isLavaActive, setIsLavaActive] = useState(false);
+  const sectionRef = useRef(null);
 
-// ── Initial form state — all fields start empty ───────────────
-const INITIAL_FORM = {
-  name:    '',
-  email:   '',
-  subject: '',
-  message: '',
-}
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    type: 'bug',
+    message: ''
+  });
+  const [submitted, setSubmitted] = useState(false);
 
-// ── Simple validators ─────────────────────────────────────────
-function validate(fields) {
-  const errors = {}
-  if (!fields.name.trim())
-    errors.name = 'Please enter your name'
-  if (!fields.email.trim())
-    errors.email = 'Please enter your email'
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email))
-    errors.email = 'Please enter a valid email address'
-  if (!fields.subject.trim())
-    errors.subject = 'Please enter a subject'
-  if (!fields.message.trim())
-    errors.message = 'Please enter your message'
-  else if (fields.message.trim().length < 20)
-    errors.message = 'Message must be at least 20 characters'
-  return errors
-}
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsLavaActive(entry.isIntersecting);
+      },
+      { threshold: 0.4 } 
+    );
 
-// ── Contact component ─────────────────────────────────────────
-function Contact() {
-  // All form field values live here in state
-  const [form, setForm]         = useState(INITIAL_FORM)
-
-  // Validation errors keyed by field name
-  const [errors, setErrors]     = useState({})
-
-  // Whether to show errors (only after the user touches a field)
-  const [touched, setTouched]   = useState({})
-
-  // Controls the loading spinner on the button
-  const [loading, setLoading]   = useState(false)
-
-  // Show the success message when form is "submitted"
-  const [submitted, setSubmitted] = useState(false)
-
-  // ── Handlers ────────────────────────────────────────────────
-
-  // Called on every keystroke — updates the right field in state
-  function handleChange(e) {
-    const { name, value } = e.target
-    const updatedForm = { ...form, [name]: value }
-    setForm(updatedForm)
-
-    // Re-validate in real time after the field has been touched
-    if (touched[name]) {
-      setErrors(validate(updatedForm))
-    }
-  }
-
-  // Called when a field loses focus — marks it as "touched"
-  function handleBlur(e) {
-    const { name } = e.target
-    setTouched((prev) => ({ ...prev, [name]: true }))
-    setErrors(validate(form))
-  }
-
-  // Called when the form is submitted
-  async function handleSubmit(e) {
-    e.preventDefault()  // Prevent the default page reload
-
-    // Mark ALL fields as touched so all errors show
-    setTouched({ name: true, email: true, subject: true, message: true })
-
-    const validationErrors = validate(form)
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors)
-      return   // Stop here — don't submit if there are errors
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
 
-    // Simulate an API call (replace with a real service like Formspree)
-    setLoading(true)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setLoading(false)
-    setSubmitted(true)
-    setForm(INITIAL_FORM)
-    setTouched({})
-    setErrors({})
-  }
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
-  // ── Render ───────────────────────────────────────────────────
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setFormData({ name: '', email: '', type: 'bug', message: '' });
+  };
+
   return (
-    <section id="feedback" className="feedback">
-      <div className="section-wrapper">
+    <section id="feedback" className="feedback" ref={sectionRef}>
+      
+      {/* 🌋 ALWAYS VISIBLE FIXED LAVA */}
+      <div 
+        className={`feedback__lava-bg ${isLavaActive ? 'feedback__lava-bg--expanded' : ''}`}
+        style={{ 
+          backgroundImage: `url(${lavaImg}), linear-gradient(to bottom, transparent 0%, transparent 80px, #ff5722 80px)` 
+        }}
+      >
+        <div className="feedback__lava-idle-anim">
+          
+          <div className={`feedback__lava-content ${isLavaActive ? 'feedback__lava-content--visible' : ''}`}>
+            <div className="feedback__container">
+              <h2 className="feedback__title">Submit Feedback</h2>
+              <p className="feedback__subtitle">
+                Found a bug in JumpBound? Have a balancing suggestion? Let the developer know!
+              </p>
 
-        <h2 className="section-title">
-          Get In <span className="accent">Touch</span>
-        </h2>
-        <p className="section-subtitle">
-          Have a project in mind or just want to say hi? I'd love to hear from you!
-        </p>
-
-        <div className="feedback__grid">
-
-          {/* ── Left: Contact info ───────────────────────── */}
-          <div className="feedback__info">
-            <p className="feedback__info-intro">
-              I'm currently open to freelance projects and internship
-              opportunities. Response time: usually within 24 hours.
-            </p>
-
-            <div className="feedback__info-items">
-              {CONTACT_INFO.map((item) => (
-                <div key={item.label} className="feedback__info-item">
-                  <span className="feedback__info-icon">{item.icon}</span>
-                  <div>
-                    <span className="feedback__info-label">{item.label}</span>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="feedback__info-value feedback__info-value--link"
-                      >
-                        {item.value}
-                      </a>
-                    ) : (
-                      <span className="feedback__info-value">{item.value}</span>
-                    )}
-                  </div>
+              {submitted ? (
+                <div className="feedback__success">
+                  Thank you! Your feedback has been recorded successfully.
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Right: Contact Form ──────────────────────── */}
-          <div className="feedback__form-wrap">
-
-            {/* Success message — shown after submission */}
-            {submitted ? (
-              <div className="feedback__success">
-                <span className="feedback__success-icon">🎉</span>
-                <h3>Message Sent!</h3>
-                <p>Thanks for reaching out. I'll get back to you soon.</p>
-                <button
-                  className="btn btn--outline"
-                  onClick={() => setSubmitted(false)}
-                >
-                  Send Another
-                </button>
-              </div>
-            ) : (
-              /* The form — only shown when not yet submitted */
-              <form className="feedback__form" onSubmit={handleSubmit} noValidate>
-
-                {/* Name + Email row */}
-                <div className="feedback__row">
-                  <div className="feedback__field">
-                    <label htmlFor="name" className="feedback__label">
-                      Name <span className="feedback__required">*</span>
-                    </label>
+              ) : (
+                <form className="feedback__form" onSubmit={handleSubmit}>
+                  
+                  <div className="feedback__field-group">
+                    <label className="feedback__label" htmlFor="name">Player Name / Alias</label>
                     <input
+                      type="text"
                       id="name"
                       name="name"
-                      type="text"
-                      className={`feedback__input ${
-                        touched.name && errors.name ? 'feedback__input--error' : ''
-                      }`}
-                      placeholder="Alex Johnson"
-                      value={form.name}
+                      className="feedback__input"
+                      value={formData.name}
                       onChange={handleChange}
-                      onBlur={handleBlur}
+                      required
                     />
-                    {touched.name && errors.name && (
-                      <span className="feedback__error">{errors.name}</span>
-                    )}
                   </div>
 
-                  <div className="feedback__field">
-                    <label htmlFor="email" className="feedback__label">
-                      Email <span className="feedback__required">*</span>
-                    </label>
+                  <div className="feedback__field-group">
+                    <label className="feedback__label" htmlFor="email">Email Address</label>
                     <input
+                      type="email"
                       id="email"
                       name="email"
-                      type="email"
-                      className={`feedback__input ${
-                        touched.email && errors.email ? 'feedback__input--error' : ''
-                      }`}
-                      placeholder="alex@example.com"
-                      value={form.email}
+                      className="feedback__input"
+                      value={formData.email}
                       onChange={handleChange}
-                      onBlur={handleBlur}
+                      required
                     />
-                    {touched.email && errors.email && (
-                      <span className="feedback__error">{errors.email}</span>
-                    )}
                   </div>
-                </div>
 
-                {/* Subject */}
-                <div className="feedback__field">
-                  <label htmlFor="subject" className="feedback__label">
-                    Subject <span className="feedback__required">*</span>
-                  </label>
-                  <input
-                    id="subject"
-                    name="subject"
-                    type="text"
-                    className={`feedback__input ${
-                      touched.subject && errors.subject ? 'feedback__input--error' : ''
-                    }`}
-                    placeholder="Internship opportunity / Project collaboration / Just saying hi"
-                    value={form.subject}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {touched.subject && errors.subject && (
-                    <span className="feedback__error">{errors.subject}</span>
-                  )}
-                </div>
-
-                {/* Message */}
-                <div className="feedback__field">
-                  <label htmlFor="message" className="feedback__label">
-                    Message <span className="feedback__required">*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={6}
-                    className={`feedback__input feedback__textarea ${
-                      touched.message && errors.message ? 'feedback__input--error' : ''
-                    }`}
-                    placeholder="Tell me about your project or just say hello..."
-                    value={form.message}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  <div className="feedback__char-count">
-                    {form.message.length} characters
-                    {form.message.length > 0 && form.message.length < 20 && (
-                      <span> (minimum 20)</span>
-                    )}
+                  <div className="feedback__field-group">
+                    <label className="feedback__label" htmlFor="type">Feedback Category</label>
+                    <select
+                      id="type"
+                      name="type"
+                      className="feedback__select"
+                      value={formData.type}
+                      onChange={handleChange}
+                    >
+                      <option value="bug">Bug Report</option>
+                      <option value="suggestion">Gameplay Suggestion</option>
+                      <option value="balance">Balance Feedback</option>
+                      <option value="other">Other Inquiry</option>
+                    </select>
                   </div>
-                  {touched.message && errors.message && (
-                    <span className="feedback__error">{errors.message}</span>
-                  )}
-                </div>
 
-                {/* Submit button */}
-                <button
-                  type="submit"
-                  className="btn btn--primary feedback__submit"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <>
-                      <span className="feedback__spinner" />
-                      Sending...
-                    </>
-                  ) : (
-                    'Send Message 🚀'
-                  )}
-                </button>
+                  <div className="feedback__field-group">
+                    <label className="feedback__label" htmlFor="message">Your Report / Message</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="4"
+                      className="feedback__textarea"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
 
-              </form>
-            )}
+                  <button type="submit" className="feedback__submit-btn">
+                    Send Feedback
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
-
+          
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Contact
+export default Feedback;

@@ -1,238 +1,192 @@
-/* ─── Contact.css ────────────────────────────────────────────── */
+/* ─── Feedback.css ───────────────────────────────────────────── */
 
 .feedback {
-  background: transparent;
+  position: relative;
+  min-height: 100vh;
+  background-color: #0D1B2A; 
+  overflow: hidden;
 }
 
-.feedback__grid {
-  display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 64px;
-  align-items: start;
+/* 🌋 ALWAYS VISIBLE FIXED LAVA: Locked to viewport bottom */
+.feedback__lava-bg {
+  position: fixed;            
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 36px; 
+  z-index: 999;              
+  
+  background-repeat: repeat-x, no-repeat;
+  background-position: center top 0px, center top; 
+  
+  /* Reduced from 1400px down to 600px for a more balanced pixel scale */
+  background-size: 600px auto, 100% 100%; 
+  
+  transition: height 0.6s ease-in-out; 
+  
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
-/* ── Info Panel ────────────────────────────────────────────── */
-.feedback__info {
+/* Activated State: Rises high up to 80vh to reveal the layout fully */
+.feedback__lava-bg--expanded {
+  height: 80vh; 
+}
+
+/* Continuous 2px Idle Floating Animation & Bottom Anchor Fix */
+.feedback__lava-idle-anim {
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.feedback__info-intro {
-  color: #888;
-  line-height: 1.8;
-  font-size: 0.95rem;
-}
-
-.feedback__info-items {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.feedback__info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-}
-
-.feedback__info-icon {
-  font-size: 1.4rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: #1a1a1a;
-  border: 1px solid #252525;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  line-height: 1;
-  padding: 8px;
+  align-items: flex-end; 
+  animation: lavaChirp 1.2s infinite ease-in-out;
 }
 
-.feedback__info-label {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #555;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 2px;
+/* Content Container visibility controller */
+.feedback__lava-content {
+  width: 100%;
+  max-width: 700px; 
+  padding: 0 24px;
+  
+  opacity: 0;
+  /* 👻 FIX: Completely prevents ghost clicks and Tab key focusing when hidden */
+  visibility: hidden; 
+  
+  transform: translateY(30px);
+  /* FIX: Added visibility to the transition settings for a smooth effect */
+  transition: opacity 0.4s ease 0.3s, transform 0.4s ease 0.3s, visibility 0.4s ease 0.3s;
+  
+  margin-bottom: 0px; 
 }
 
-.feedback__info-value {
-  font-size: 0.9rem;
-  color: #aaa;
+.feedback__lava-content--visible {
+  opacity: 1;
+  /* 👻 FIX: Makes the form clickable and visible again when lava expands */
+  visibility: visible; 
+  transform: translateY(0);
 }
 
-.feedback__info-value--link {
-  transition: color 0.2s;
-}
-.feedback__info-value--link:hover {
-  color: var(--accent);
+/* ── Form Card Framework (Flush to the ground) ──────────────── */
+.feedback__container {
+  width: 100%;
+  background-color: #1B263B; 
+  border: 1.5px solid #415A77; 
+  border-bottom: none; 
+  border-radius: 16px 16px 0 0; 
+  padding: 28px 36px; 
+  box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.4); 
 }
 
-/* ── Form ──────────────────────────────────────────────────── */
-.feedback__form-wrap {
-  background: #161616;
-  border: 1px solid #222;
-  border-radius: 20px;
-  padding: 40px;
+.feedback__title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #E0E1DD;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.feedback__subtitle {
+  font-size: 0.85rem;
+  color: #778DA9;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 1.4;
 }
 
 .feedback__form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px; 
 }
 
-/* Two-column row (name + email) */
-.feedback__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-/* ── Field wrapper ─────────────────────────────────────────── */
-.feedback__field {
+.feedback__field-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
 .feedback__label {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #aaa;
+  color: #E0E1DD;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.feedback__required {
-  color: var(--accent);
-}
-
-/* ── Input & Textarea ──────────────────────────────────────── */
-.feedback__input {
-  background: #1e1e1e;
-  border: 1.5px solid #2a2a2a;
-  border-radius: 10px;
-  padding: 12px 16px;
-  color: #e0e0e0;
+.feedback__input,
+.feedback__select,
+.feedback__textarea {
+  width: 100%;
+  padding: 12px 14px; 
+  border-radius: 8px;
+  background-color: #0D1B2A;
+  border: 1.5px solid #415A77;
+  color: #E0E1DD;
   font-size: 0.9rem;
   font-family: inherit;
-  transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
-  width: 100%;
-}
-
-.feedback__input::placeholder {
-  color: #444;
-}
-
-.feedback__input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-bg);
-}
-
-.feedback__input--error {
-  border-color: #e05050;
-}
-.feedback__input--error:focus {
-  box-shadow: 0 0 0 3px rgba(224, 80, 80, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .feedback__textarea {
-  resize: vertical;
-  min-height: 140px;
+  resize: none;
 }
 
-/* ── Char count ────────────────────────────────────────────── */
-.feedback__char-count {
-  font-size: 0.75rem;
-  color: #444;
-  text-align: right;
-  margin-top: -2px;
+.feedback__input:focus,
+.feedback__select:focus,
+.feedback__textarea:focus {
+  border-color: #778DA9;
+  box-shadow: 0 0 0 3px rgba(119, 141, 169, 0.15);
 }
 
-/* ── Error message ─────────────────────────────────────────── */
-.feedback__error {
-  font-size: 0.8rem;
-  color: #e05050;
-  margin-top: -2px;
+.feedback__select option {
+  background-color: #0D1B2A;
+  color: #E0E1DD;
 }
 
-/* ── Submit button ─────────────────────────────────────────── */
-.feedback__submit {
+.feedback__submit-btn {
   width: 100%;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  padding: 14px;
+  margin-top: 4px;
+  background-color: #415A77;
+  border: 1.5px solid #415A77;
+  color: #E0E1DD;
   font-size: 1rem;
-  padding: 14px 28px;
-  cursor: pointer;
-  border: none;
-}
-
-.feedback__submit:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* ── Spinner ───────────────────────────────────────────────── */
-.feedback__spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid rgba(15, 15, 15, 0.3);
-  border-top-color: #0f0f0f;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ── Success message ───────────────────────────────────────── */
-.feedback__success {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 16px;
-  padding: 40px 20px;
-}
-
-.feedback__success-icon {
-  font-size: 3.5rem;
-}
-
-.feedback__success h3 {
-  font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
-.feedback__success p {
-  color: #888;
-  line-height: 1.6;
+.feedback__submit-btn:hover {
+  border-color: #778DA9;
+  background-color: #778DA9;
+  transform: translateY(-2px);
 }
 
-/* ── Responsive ────────────────────────────────────────────── */
-@media (max-width: 860px) {
-  .feedback__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+.feedback__success {
+  background-color: rgba(65, 90, 119, 0.2);
+  border: 1.5px solid #415A77;
+  color: #E0E1DD;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ── Motion Logic ── */
+@keyframes lavaChirp {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .feedback__container {
+    padding: 20px;
   }
-}
-
-@media (max-width: 540px) {
-  .feedback__row {
-    grid-template-columns: 1fr;
-  }
-
-  .feedback__form-wrap {
-    padding: 24px 20px;
+  .feedback__lava-bg--expanded {
+    height: 85vh; 
   }
 }
